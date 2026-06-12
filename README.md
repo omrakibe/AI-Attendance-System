@@ -232,15 +232,6 @@ Phase 1:
 
 ---
 
-## Team Members
-
-| Name | Responsibility |
-|--------|----------------|
-| Member 1 | Authentication & Security |
-| Member 2 | Student Service |
-| Member 3 | Attendance Service |
-| Member 4 | AI Service & Integration |
-
 ---
 
 ## License
