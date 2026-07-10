@@ -1,7 +1,7 @@
-package in.attendai.authservice.entity;
+package in.attendai.auth.entity;
 
-import in.attendai.authservice.enums.AccountStatus;
-import in.attendai.authservice.enums.Role;
+import in.attendai.auth.enums.AccountStatus;
+import in.attendai.auth.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User
+public class User extends BaseEntity
 {
 
     @Id
@@ -38,9 +38,9 @@ public class User
     @Column(nullable = false)
     private AccountStatus status;
 
-    private Long approvedBy;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "approved_by")
+    private User approvedBy;
 
     private LocalDateTime approvedAt;
-
-    private LocalDateTime createdAt;
 }

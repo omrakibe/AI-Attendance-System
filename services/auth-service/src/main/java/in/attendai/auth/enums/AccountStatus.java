@@ -1,4 +1,4 @@
-package in.attendai.authservice.enums;
+package in.attendai.auth.enums;
 
 public enum AccountStatus
 {
