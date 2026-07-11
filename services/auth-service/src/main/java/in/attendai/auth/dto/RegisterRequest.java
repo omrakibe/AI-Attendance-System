@@ -24,8 +24,8 @@ public class RegisterRequest
     @NotBlank
     private String email;
 
-    @NotBlank
-    @Size(min = 8)
+    @NotBlank(message = "Password is required")
+    @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
 
     @NotNull
