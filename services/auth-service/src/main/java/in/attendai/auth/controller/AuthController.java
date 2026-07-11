@@ -1,13 +1,16 @@
 package in.attendai.auth.controller;
 
-import in.attendai.auth.dto.ApiResponse;
-import in.attendai.auth.dto.RegisterRequest;
+import in.attendai.auth.entity.dto.ApiResponse;
+import in.attendai.auth.entity.dto.RegisterRequest;
+import in.attendai.auth.entity.dto.UserApprovalResponse;
 import in.attendai.auth.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -25,5 +28,23 @@ public class AuthController
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(authService.register(request));
+    }
+
+    @GetMapping("/pending-users")
+    public ResponseEntity<List<UserApprovalResponse>> getPendingUsers()
+    {
+        return ResponseEntity.ok(authService.getPendingUsers());
+    }
+
+    @PutMapping("/approve/{userId}")
+    public ResponseEntity<ApiResponse> approveUser(@PathVariable Long userId)
+    {
+        return ResponseEntity.ok(authService.approveUser(userId));
+    }
+
+    @PutMapping("/reject/{userId}")
+    public ResponseEntity<ApiResponse> rejectUser(@PathVariable Long userId)
+    {
+        return ResponseEntity.ok(authService.rejectUser(userId));
     }
 }

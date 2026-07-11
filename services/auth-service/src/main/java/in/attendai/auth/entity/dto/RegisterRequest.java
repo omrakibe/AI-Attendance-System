@@ -1,4 +1,4 @@
-package in.attendai.auth.dto;
+package in.attendai.auth.entity.dto;
 
 import in.attendai.auth.enums.Role;
 import jakarta.validation.constraints.Email;

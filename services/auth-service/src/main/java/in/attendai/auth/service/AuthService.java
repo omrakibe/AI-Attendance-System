@@ -1,12 +1,15 @@
 package in.attendai.auth.service;
 
-import in.attendai.auth.dto.ApiResponse;
-import in.attendai.auth.dto.RegisterRequest;
+import in.attendai.auth.entity.dto.ApiResponse;
+import in.attendai.auth.entity.dto.RegisterRequest;
 import in.attendai.auth.entity.User;
+import in.attendai.auth.entity.dto.UserApprovalResponse;
 import in.attendai.auth.enums.AccountStatus;
 import in.attendai.auth.enums.Role;
+import in.attendai.auth.exception.AccountAlreadyProcessedException;
 import in.attendai.auth.exception.EmailAlreadyExistsException;
 import in.attendai.auth.exception.InvalidRoleException;
+import in.attendai.auth.exception.UserNotFoundException;
 import in.attendai.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -55,5 +59,89 @@ public class AuthService implements IAuthService
                 .message("Registration request submitted successfully. Waiting for approval.")
                 .timestamp(LocalDateTime.now())
                 .build();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<UserApprovalResponse> getPendingUsers()
+    {
+        return userRepository.findByStatus(AccountStatus.PENDING)
+                .stream()
+                .map(user -> UserApprovalResponse.builder()
+                        .id(user.getId())
+                        .fullName(user.getFullName())
+                        .email(user.getEmail())
+                        .role(user.getRole())
+                        .status(user.getStatus())
+                        .createdAt(user.getCreatedAt())
+                        .build())
+                .toList();
+    }
+
+    @Override
+    @Transactional
+    public ApiResponse approveUser(Long userId)
+    {
+
+        User user = getUserById(userId);
+
+        if (user.getStatus() == AccountStatus.ACTIVE)
+        {
+            throw new AccountAlreadyProcessedException("User account is already approved.");
+        }
+
+        if (user.getStatus() == AccountStatus.REJECTED)
+        {
+            throw new AccountAlreadyProcessedException("Rejected account cannot be approved.");
+        }
+
+        user.setStatus(AccountStatus.ACTIVE);
+        user.setApprovedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+
+        return ApiResponse.builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .message("Account approved successfully.")
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+
+    @Override
+    @Transactional
+    public ApiResponse rejectUser(Long userId)
+    {
+
+        User user = getUserById(userId);
+
+        if (user.getStatus() == AccountStatus.REJECTED)
+        {
+            throw new AccountAlreadyProcessedException("User account is already rejected.");
+        }
+
+        if (user.getStatus() == AccountStatus.ACTIVE)
+        {
+            throw new AccountAlreadyProcessedException("Approved account cannot be rejected.");
+        }
+
+        user.setStatus(AccountStatus.REJECTED);
+        user.setApprovedAt(LocalDateTime.now());
+
+        userRepository.save(user);
+
+        return ApiResponse.builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .message("Account rejected successfully.")
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+
+    private User getUserById(Long userId)
+    {
+        return userRepository.findById(userId)
+                .orElseThrow(() ->
+                        new UserNotFoundException("User not found with id: " + userId));
     }
 }

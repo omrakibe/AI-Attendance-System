@@ -1,6 +1,6 @@
 package in.attendai.auth.exception;
 
-import in.attendai.auth.dto.ApiResponse;
+import in.attendai.auth.entity.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,45 +18,14 @@ public class GlobalExceptionHandler
     public ResponseEntity<ApiResponse> handleEmailAlreadyExists(
             EmailAlreadyExistsException ex)
     {
-
-        ApiResponse response = ApiResponse.builder()
-                .success(false)
-                .status(HttpStatus.CONFLICT.value())
-                .message(ex.getMessage())
-                .timestamp(LocalDateTime.now())
-                .build();
-
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+        return buildErrorResponse(HttpStatus.CONFLICT, ex.getMessage());
     }
 
     @ExceptionHandler(InvalidRoleException.class)
     public ResponseEntity<ApiResponse> handleInvalidRole(
             InvalidRoleException ex)
     {
-
-        ApiResponse response = ApiResponse.builder()
-                .success(false)
-                .status(HttpStatus.BAD_REQUEST.value())
-                .message(ex.getMessage())
-                .timestamp(LocalDateTime.now())
-                .build();
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-    }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse> handleGenericException(
-            Exception ex)
-    {
-
-        ApiResponse response = ApiResponse.builder()
-                .success(false)
-                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .message("An unexpected error occurred.")
-                .timestamp(LocalDateTime.now())
-                .build();
-
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -68,13 +37,42 @@ public class GlobalExceptionHandler
                         .getFieldError())
                 .getDefaultMessage();
 
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, message);
+    }
+
+    @ExceptionHandler(AccountAlreadyProcessedException.class)
+    public ResponseEntity<ApiResponse> handleAccountAlreadyProcessed(
+            AccountAlreadyProcessedException ex)
+    {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ApiResponse> handleUserNotFound(
+            UserNotFoundException ex)
+    {
+        return buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse> handleGenericException(
+            Exception ex)
+    {
+        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred.");
+    }
+
+    private ResponseEntity<ApiResponse> buildErrorResponse(
+            HttpStatus status,
+            String message)
+    {
+
         ApiResponse response = ApiResponse.builder()
                 .success(false)
-                .status(HttpStatus.BAD_REQUEST.value())
+                .status(status.value())
                 .message(message)
                 .timestamp(LocalDateTime.now())
                 .build();
 
-        return ResponseEntity.badRequest().body(response);
+        return ResponseEntity.status(status).body(response);
     }
 }
