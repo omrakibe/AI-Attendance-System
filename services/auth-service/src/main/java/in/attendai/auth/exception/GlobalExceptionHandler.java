@@ -3,6 +3,7 @@ package in.attendai.auth.exception;
 import in.attendai.auth.entity.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -59,6 +60,13 @@ public class GlobalExceptionHandler
             Exception ex)
     {
         return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred.");
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ApiResponse> handleBadCredentialsException(
+            BadCredentialsException ex)
+    {
+        return buildErrorResponse(HttpStatus.UNAUTHORIZED, "Invalid email or password.");
     }
 
     private ResponseEntity<ApiResponse> buildErrorResponse(

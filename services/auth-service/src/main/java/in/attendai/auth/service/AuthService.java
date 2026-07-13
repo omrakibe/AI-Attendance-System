@@ -1,9 +1,7 @@
 package in.attendai.auth.service;
 
-import in.attendai.auth.entity.dto.ApiResponse;
-import in.attendai.auth.entity.dto.RegisterRequest;
+import in.attendai.auth.entity.dto.*;
 import in.attendai.auth.entity.User;
-import in.attendai.auth.entity.dto.UserApprovalResponse;
 import in.attendai.auth.enums.AccountStatus;
 import in.attendai.auth.enums.Role;
 import in.attendai.auth.exception.AccountAlreadyProcessedException;
@@ -11,8 +9,12 @@ import in.attendai.auth.exception.EmailAlreadyExistsException;
 import in.attendai.auth.exception.InvalidRoleException;
 import in.attendai.auth.exception.UserNotFoundException;
 import in.attendai.auth.repository.UserRepository;
+import in.attendai.auth.security.CustomUserDetails;
+import in.attendai.auth.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,8 @@ public class AuthService implements IAuthService
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
 
     @Override
     public ApiResponse register(RegisterRequest request)
@@ -135,6 +139,31 @@ public class AuthService implements IAuthService
                 .status(HttpStatus.OK.value())
                 .message("Account rejected successfully.")
                 .timestamp(LocalDateTime.now())
+                .build();
+    }
+
+    @Override
+    public LoginResponse login(LoginRequest request)
+    {
+
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
+
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() ->
+                        new UserNotFoundException("User not found"));
+
+        String jwt = jwtService.generateToken(new CustomUserDetails(user));
+
+        return LoginResponse.builder()
+                .token(jwt)
+                .type("Bearer")
+                .email(user.getEmail())
+                .role(user.getRole())
                 .build();
     }
 

@@ -1,8 +1,6 @@
 package in.attendai.auth.controller;
 
-import in.attendai.auth.entity.dto.ApiResponse;
-import in.attendai.auth.entity.dto.RegisterRequest;
-import in.attendai.auth.entity.dto.UserApprovalResponse;
+import in.attendai.auth.entity.dto.*;
 import in.attendai.auth.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -46,5 +44,13 @@ public class AuthController
     public ResponseEntity<ApiResponse> rejectUser(@PathVariable Long userId)
     {
         return ResponseEntity.ok(authService.rejectUser(userId));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(
+            @Valid @RequestBody LoginRequest request)
+    {
+
+        return ResponseEntity.ok(authService.login(request));
     }
 }

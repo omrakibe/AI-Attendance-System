@@ -1,8 +1,6 @@
 package in.attendai.auth.service;
 
-import in.attendai.auth.entity.dto.ApiResponse;
-import in.attendai.auth.entity.dto.RegisterRequest;
-import in.attendai.auth.entity.dto.UserApprovalResponse;
+import in.attendai.auth.entity.dto.*;
 
 import java.util.List;
 
@@ -15,4 +13,6 @@ public interface IAuthService
     ApiResponse approveUser(Long userId);
 
     ApiResponse rejectUser(Long userId);
+
+    LoginResponse login(LoginRequest request);
 }
