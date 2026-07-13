@@ -55,18 +55,34 @@ public class GlobalExceptionHandler
         return buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse> handleGenericException(
-            Exception ex)
-    {
-        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred.");
-    }
-
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ApiResponse> handleBadCredentialsException(
             BadCredentialsException ex)
     {
         return buildErrorResponse(HttpStatus.UNAUTHORIZED, "Invalid email or password.");
+    }
+
+    @ExceptionHandler(AccountPendingException.class)
+    public ResponseEntity<ApiResponse> handleAccountPendingException(
+            AccountPendingException ex)
+    {
+
+        return buildErrorResponse(HttpStatus.FORBIDDEN, ex.getMessage());
+    }
+
+    @ExceptionHandler(AccountRejectedException.class)
+    public ResponseEntity<ApiResponse> handleAccountRejectedException(
+            AccountRejectedException ex)
+    {
+
+        return buildErrorResponse(HttpStatus.FORBIDDEN, ex.getMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse> handleGenericException(
+            Exception ex)
+    {
+        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred.");
     }
 
     private ResponseEntity<ApiResponse> buildErrorResponse(

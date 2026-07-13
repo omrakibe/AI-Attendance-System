@@ -4,10 +4,7 @@ import in.attendai.auth.entity.dto.*;
 import in.attendai.auth.entity.User;
 import in.attendai.auth.enums.AccountStatus;
 import in.attendai.auth.enums.Role;
-import in.attendai.auth.exception.AccountAlreadyProcessedException;
-import in.attendai.auth.exception.EmailAlreadyExistsException;
-import in.attendai.auth.exception.InvalidRoleException;
-import in.attendai.auth.exception.UserNotFoundException;
+import in.attendai.auth.exception.*;
 import in.attendai.auth.repository.UserRepository;
 import in.attendai.auth.security.CustomUserDetails;
 import in.attendai.auth.security.JwtService;
@@ -156,6 +153,18 @@ public class AuthService implements IAuthService
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() ->
                         new UserNotFoundException("User not found"));
+
+        if (user.getStatus() == AccountStatus.PENDING)
+        {
+            throw new AccountPendingException(
+                    "Your account is pending approval.");
+        }
+
+        if (user.getStatus() == AccountStatus.REJECTED)
+        {
+            throw new AccountRejectedException(
+                    "Your account has been rejected. Please contact the administrator.");
+        }
 
         String jwt = jwtService.generateToken(new CustomUserDetails(user));
 
