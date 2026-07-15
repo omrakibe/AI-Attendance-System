@@ -52,8 +52,11 @@ This project introduces AI-driven attendance management where:
 Faculty can provide prompts such as:
 
 > Mark roll numbers 10 to 20 present and remaining absent.
+
 > Mark roll numbers 10 to 20 present.
+
 > Mark all students present.
+
 > Mark everyone present except roll number 18.
 
 The AI service converts the prompt into structured attendance commands and updates attendance records automatically.
