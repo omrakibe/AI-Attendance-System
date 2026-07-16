@@ -1,11 +1,13 @@
 package in.attendai.auth.service;
 
+import in.attendai.auth.entity.PasswordResetOtp;
 import in.attendai.auth.entity.PendingRegistration;
 import in.attendai.auth.entity.dto.*;
 import in.attendai.auth.entity.User;
 import in.attendai.auth.enums.AccountStatus;
 import in.attendai.auth.enums.Role;
 import in.attendai.auth.exception.*;
+import in.attendai.auth.repository.PasswordResetOtpRepository;
 import in.attendai.auth.repository.PendingRegistrationRepository;
 import in.attendai.auth.repository.UserRepository;
 import in.attendai.auth.security.CustomUserDetails;
@@ -38,6 +40,8 @@ public class AuthService implements IAuthService
     private final PendingRegistrationRepository pendingRegistrationRepository;
     private final EmailService emailService;
     private final OtpUtil otpUtil;
+    private final PasswordResetOtpRepository passwordResetOtpRepository;
+
 
     @Override
     @Transactional
@@ -277,6 +281,106 @@ public class AuthService implements IAuthService
                 .type("Bearer")
                 .email(user.getEmail())
                 .role(user.getRole())
+                .build();
+    }
+
+    @Override
+    @Transactional
+    public ApiResponse forgotPassword(ForgotPasswordRequest request)
+    {
+
+        // 1. Check if user exists
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() ->
+                        new UserNotFoundException("No account found with this email."));
+
+        // 2. Generate new OTP
+        String otp = otpUtil.generateOtp();
+
+        // 3. Check if a reset request already exists
+        Optional<PasswordResetOtp> existingOtp =
+                passwordResetOtpRepository.findByEmail(request.getEmail());
+
+        if (existingOtp.isPresent())
+        {
+
+            PasswordResetOtp resetOtp = existingOtp.get();
+
+            resetOtp.setOtp(otp);
+            resetOtp.setOtpExpiry(LocalDateTime.now().plusMinutes(5));
+
+            passwordResetOtpRepository.save(resetOtp);
+
+        } else
+        {
+
+            PasswordResetOtp resetOtp = PasswordResetOtp.builder()
+                    .email(user.getEmail())
+                    .otp(otp)
+                    .otpExpiry(LocalDateTime.now().plusMinutes(5))
+                    .build();
+
+            passwordResetOtpRepository.save(resetOtp);
+        }
+
+        // 4. Send OTP email
+        emailService.sendPasswordResetOtp(user.getEmail(), otp);
+
+        // 5. Response
+        return ApiResponse.builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .message("Password reset OTP has been sent to your registered email.")
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+
+    @Override
+    @Transactional
+    public ApiResponse resetPassword(ResetPasswordRequest request)
+    {
+
+        // 1. Find password reset record
+        PasswordResetOtp resetOtp = passwordResetOtpRepository
+                .findByEmail(request.getEmail())
+                .orElseThrow(() -> new PasswordResetOtpNotFoundException(
+                        "No password reset request found."
+                ));
+
+        // 2. Check OTP expiry
+        if (resetOtp.getOtpExpiry().isBefore(LocalDateTime.now()))
+        {
+            throw new OtpExpiredException(
+                    "OTP has expired. Please request a new password reset OTP."
+            );
+        }
+
+        // 3. Verify OTP
+        if (!resetOtp.getOtp().equals(request.getOtp()))
+        {
+            throw new InvalidOtpException("Invalid OTP.");
+        }
+
+        // 4. Find user
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new UserNotFoundException(
+                        "User not found."
+                ));
+
+        // 5. Update password
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+
+        userRepository.save(user);
+
+        // 6. Delete used OTP
+        passwordResetOtpRepository.delete(resetOtp);
+
+        // 7. Return response
+        return ApiResponse.builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .message("Password has been reset successfully.")
+                .timestamp(LocalDateTime.now())
                 .build();
     }
 

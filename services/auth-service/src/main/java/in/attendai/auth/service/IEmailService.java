@@ -11,4 +11,6 @@ public interface IEmailService
 
     void sendOtpEmail(String email, String otp);
 
+    void sendPasswordResetOtp(String email, String otp);
+
 }

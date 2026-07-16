@@ -45,4 +45,29 @@ public class EmailService implements IEmailService
 
         sendSimpleEmail(email, subject, body);
     }
+
+    @Override
+    public void sendPasswordResetOtp(String email, String otp)
+    {
+        String subject = "AttendAI Password Reset OTP";
+
+        String body = """
+                Hello,
+                
+                We received a request to reset your password.
+                
+                Your OTP is:
+                
+                %s
+                
+                This OTP is valid for 5 minutes.
+                
+                If you didn't request a password reset, you can safely ignore this email.
+                
+                Regards,
+                AttendAI Team
+                """.formatted(otp);
+
+        sendSimpleEmail(email, subject, body);
+    }
 }

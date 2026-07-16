@@ -63,6 +63,22 @@ public class AuthController
         return ResponseEntity.ok(authService.verifyOtp(request));
     }
 
+    @PostMapping("/forgot-password")
+    public ResponseEntity<ApiResponse> forgotPassword(
+            @Valid @RequestBody ForgotPasswordRequest request)
+    {
+
+        return ResponseEntity.ok(authService.forgotPassword(request));
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<ApiResponse> resetPassword(
+            @Valid @RequestBody ResetPasswordRequest request)
+    {
+
+        return ResponseEntity.ok(authService.resetPassword(request));
+    }
+
     @GetMapping("/test-email")
     public String testEmail()
     {

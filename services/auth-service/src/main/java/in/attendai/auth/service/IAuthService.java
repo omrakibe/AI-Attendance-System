@@ -17,4 +17,8 @@ public interface IAuthService
     ApiResponse rejectUser(Long userId);
 
     LoginResponse login(LoginRequest request);
+
+    ApiResponse forgotPassword(ForgotPasswordRequest request);
+
+    ApiResponse resetPassword(ResetPasswordRequest request);
 }
