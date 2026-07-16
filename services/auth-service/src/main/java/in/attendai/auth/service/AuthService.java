@@ -205,6 +205,7 @@ public class AuthService implements IAuthService
         user.setApprovedAt(LocalDateTime.now());
 
         userRepository.save(user);
+        emailService.sendApprovalEmail(user);
 
         return ApiResponse.builder()
                 .success(true)
@@ -238,7 +239,7 @@ public class AuthService implements IAuthService
         user.setApprovedAt(LocalDateTime.now());
 
         userRepository.delete(user);
-
+        emailService.sendRejectionEmail(user);
         return ApiResponse.builder()
                 .success(true)
                 .status(HttpStatus.OK.value())

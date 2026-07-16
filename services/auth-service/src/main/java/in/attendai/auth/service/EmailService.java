@@ -1,5 +1,6 @@
 package in.attendai.auth.service;
 
+import in.attendai.auth.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -69,5 +70,51 @@ public class EmailService implements IEmailService
                 """.formatted(otp);
 
         sendSimpleEmail(email, subject, body);
+    }
+
+    @Override
+    public void sendApprovalEmail(User user)
+    {
+
+        String subject = "Your AttendAI Account Has Been Approved";
+
+        String body = """
+                Dear %s,
+                
+                Congratulations!
+                
+                Your registration request has been approved.
+                
+                You can now log in to AttendAI using your registered email and password.
+                
+                We’re excited to have you on board.
+                
+                Regards,
+                AttendAI Team
+                """.formatted(user.getFullName());
+
+        sendSimpleEmail(user.getEmail(), subject, body);
+    }
+
+    @Override
+    public void sendRejectionEmail(User user)
+    {
+
+        String subject = "Update on Your AttendAI Registration";
+
+        String body = """
+                Dear %s,
+                
+                Thank you for registering with AttendAI.
+                
+                After reviewing your registration request, we regret to inform you that it has been rejected.
+                
+                If you believe this was a mistake or need further clarification, please contact the administrator.
+                
+                Regards,
+                AttendAI Team
+                """.formatted(user.getFullName());
+
+        sendSimpleEmail(user.getEmail(), subject, body);
     }
 }

@@ -1,5 +1,7 @@
 package in.attendai.auth.service;
 
+import in.attendai.auth.entity.User;
+
 public interface IEmailService
 {
 
@@ -12,5 +14,9 @@ public interface IEmailService
     void sendOtpEmail(String email, String otp);
 
     void sendPasswordResetOtp(String email, String otp);
+
+    void sendApprovalEmail(User user);
+
+    void sendRejectionEmail(User user);
 
 }

@@ -78,6 +78,45 @@ public class GlobalExceptionHandler
         return buildErrorResponse(HttpStatus.FORBIDDEN, ex.getMessage());
     }
 
+    @ExceptionHandler(PendingRegistrationExistsException.class)
+    public ResponseEntity<ApiResponse> handlePendingRegistrationExistsException(
+            PendingRegistrationExistsException ex)
+    {
+
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(InvalidOtpException.class)
+    public ResponseEntity<ApiResponse> handleInvalidOtpException(
+            InvalidOtpException ex)
+    {
+
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(PendingRegistrationNotFoundException.class)
+    public ResponseEntity<ApiResponse> handlePendingRegistrationNotFoundException(
+            PendingRegistrationNotFoundException ex)
+    {
+
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(PasswordResetOtpNotFoundException.class)
+    public ResponseEntity<ApiResponse> handlePasswordResetOtpNotFoundException(
+            PasswordResetOtpNotFoundException ex)
+    {
+
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(OtpExpiredException.class)
+    public ResponseEntity<ApiResponse> handleOtpExpiredException(
+            OtpExpiredException ex)
+    {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse> handleGenericException(
             Exception ex)
