@@ -99,7 +99,7 @@ public class GlobalExceptionHandler
             PendingRegistrationNotFoundException ex)
     {
 
-        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+        return buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
     @ExceptionHandler(PasswordResetOtpNotFoundException.class)
@@ -107,7 +107,7 @@ public class GlobalExceptionHandler
             PasswordResetOtpNotFoundException ex)
     {
 
-        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+        return buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
     @ExceptionHandler(OtpExpiredException.class)
