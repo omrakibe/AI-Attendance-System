@@ -79,15 +79,15 @@ public class AuthController
         return ResponseEntity.ok(authService.resetPassword(request));
     }
 
-    @GetMapping("/test-email")
-    public String testEmail()
-    {
-        emailService.sendSimpleEmail(
-                "rakibeom30@gmail.com",
-                "AttendAI Test Email",
-                "Congratulations! Your email configuration is working."
-        );
-
-        return "Email sent successfully.";
-    }
+//    @GetMapping("/test-email")
+//    public String testEmail()
+//    {
+//        emailService.sendSimpleEmail(
+//                "rakibeom30@gmail.com",
+//                "AttendAI Test Email",
+//                "Congratulations! Your email configuration is working."
+//        );
+//
+//        return "Email sent successfully.";
+//    }
 }
