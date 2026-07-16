@@ -8,6 +8,8 @@ public interface IAuthService
 {
     ApiResponse register(RegisterRequest request);
 
+    ApiResponse verifyOtp(VerifyOtpRequest request);
+
     List<UserApprovalResponse> getPendingUsers();
 
     ApiResponse approveUser(Long userId);

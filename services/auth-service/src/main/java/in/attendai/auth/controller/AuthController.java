@@ -2,6 +2,7 @@ package in.attendai.auth.controller;
 
 import in.attendai.auth.entity.dto.*;
 import in.attendai.auth.service.AuthService;
+import in.attendai.auth.service.EmailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ public class AuthController
 {
 
     private final AuthService authService;
+    private final EmailService emailService;
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> register(
@@ -52,5 +54,24 @@ public class AuthController
     {
 
         return ResponseEntity.ok(authService.login(request));
+    }
+
+    @PostMapping("/verify-otp")
+    public ResponseEntity<ApiResponse> verifyOtp(
+            @Valid @RequestBody VerifyOtpRequest request)
+    {
+        return ResponseEntity.ok(authService.verifyOtp(request));
+    }
+
+    @GetMapping("/test-email")
+    public String testEmail()
+    {
+        emailService.sendSimpleEmail(
+                "rakibeom30@gmail.com",
+                "AttendAI Test Email",
+                "Congratulations! Your email configuration is working."
+        );
+
+        return "Email sent successfully.";
     }
 }
