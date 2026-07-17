@@ -76,7 +76,6 @@ public class GlobalExceptionHandler
             EmailAlreadyExistsException.class,
             RollNumberAlreadyExistsException.class,
             EmployeeIdAlreadyExistsException.class,
-            InvalidRegistrationException.class,
             InvalidOtpException.class,
             OtpExpiredException.class,
             PendingRegistrationExistsException.class,
