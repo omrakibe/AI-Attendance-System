@@ -35,6 +35,10 @@ public class PendingRegistration
     @Column(nullable = false)
     private Role role;
 
+    private String employeeId;
+
+    private String rollNumber;
+
     @Column(nullable = false)
     private String otp;
 

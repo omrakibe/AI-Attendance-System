@@ -34,6 +34,12 @@ public class User extends BaseEntity
     @Column(nullable = false)
     private Role role;
 
+    @Column(unique = true)
+    private String employeeId;
+
+    @Column(unique = true)
+    private String rollNumber;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AccountStatus status;

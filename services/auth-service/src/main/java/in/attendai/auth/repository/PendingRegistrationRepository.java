@@ -12,4 +12,8 @@ public interface PendingRegistrationRepository extends JpaRepository<PendingRegi
     boolean existsByEmail(String email);
 
     void deleteByEmail(String email);
+
+    boolean existsByRollNumber(String rollNumber);
+
+    boolean existsByEmployeeId(String employeeId);
 }

@@ -18,6 +18,8 @@ public class UserApprovalResponse
     private String fullName;
     private String email;
     private Role role;
+    private String employeeId;
+    private String rollNumber;
     private AccountStatus status;
     private LocalDateTime createdAt;
 }

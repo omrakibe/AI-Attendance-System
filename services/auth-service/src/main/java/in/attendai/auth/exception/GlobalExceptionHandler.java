@@ -14,21 +14,6 @@ import java.util.Objects;
 @RestControllerAdvice
 public class GlobalExceptionHandler
 {
-
-    @ExceptionHandler(EmailAlreadyExistsException.class)
-    public ResponseEntity<ApiResponse> handleEmailAlreadyExists(
-            EmailAlreadyExistsException ex)
-    {
-        return buildErrorResponse(HttpStatus.CONFLICT, ex.getMessage());
-    }
-
-    @ExceptionHandler(InvalidRoleException.class)
-    public ResponseEntity<ApiResponse> handleInvalidRole(
-            InvalidRoleException ex)
-    {
-        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
-    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse> handleValidationException(
             MethodArgumentNotValidException ex)
@@ -39,13 +24,6 @@ public class GlobalExceptionHandler
                 .getDefaultMessage();
 
         return buildErrorResponse(HttpStatus.BAD_REQUEST, message);
-    }
-
-    @ExceptionHandler(AccountAlreadyProcessedException.class)
-    public ResponseEntity<ApiResponse> handleAccountAlreadyProcessed(
-            AccountAlreadyProcessedException ex)
-    {
-        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
     @ExceptionHandler(UserNotFoundException.class)
@@ -78,22 +56,6 @@ public class GlobalExceptionHandler
         return buildErrorResponse(HttpStatus.FORBIDDEN, ex.getMessage());
     }
 
-    @ExceptionHandler(PendingRegistrationExistsException.class)
-    public ResponseEntity<ApiResponse> handlePendingRegistrationExistsException(
-            PendingRegistrationExistsException ex)
-    {
-
-        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
-    }
-
-    @ExceptionHandler(InvalidOtpException.class)
-    public ResponseEntity<ApiResponse> handleInvalidOtpException(
-            InvalidOtpException ex)
-    {
-
-        return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
-    }
-
     @ExceptionHandler(PendingRegistrationNotFoundException.class)
     public ResponseEntity<ApiResponse> handlePendingRegistrationNotFoundException(
             PendingRegistrationNotFoundException ex)
@@ -110,10 +72,20 @@ public class GlobalExceptionHandler
         return buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
-    @ExceptionHandler(OtpExpiredException.class)
-    public ResponseEntity<ApiResponse> handleOtpExpiredException(
-            OtpExpiredException ex)
+    @ExceptionHandler({
+            EmailAlreadyExistsException.class,
+            RollNumberAlreadyExistsException.class,
+            EmployeeIdAlreadyExistsException.class,
+            InvalidRegistrationException.class,
+            InvalidOtpException.class,
+            OtpExpiredException.class,
+            PendingRegistrationExistsException.class,
+            AccountAlreadyProcessedException.class,
+            InvalidRoleException.class
+    })
+    public ResponseEntity<ApiResponse> handleBadRequestExceptions(RuntimeException ex)
     {
+
         return buildErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 

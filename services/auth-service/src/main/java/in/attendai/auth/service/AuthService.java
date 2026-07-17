@@ -48,6 +48,14 @@ public class AuthService implements IAuthService
     public ApiResponse register(RegisterRequest request)
     {
 
+        String rollNumber = request.getRollNumber() == null
+                ? null
+                : request.getRollNumber().trim();
+
+        String employeeId = request.getEmployeeId() == null
+                ? null
+                : request.getEmployeeId().trim();
+
         if (userRepository.existsByEmail(request.getEmail()))
         {
             throw new EmailAlreadyExistsException("Email already exists.");
@@ -56,6 +64,51 @@ public class AuthService implements IAuthService
         if (request.getRole() == Role.ADMIN)
         {
             throw new InvalidRoleException("Admin registration is not allowed.");
+        }
+
+        if (request.getRole() == Role.STUDENT)
+        {
+
+            if (rollNumber == null || rollNumber.isBlank())
+            {
+                throw new InvalidRoleException("Roll number is required for students.");
+            }
+
+            if (userRepository.existsByRollNumber(rollNumber) ||
+                    pendingRegistrationRepository.existsByRollNumber(rollNumber))
+            {
+
+                throw new RollNumberAlreadyExistsException("Roll number is already registered.");
+            }
+
+            if (employeeId != null &&
+                    !employeeId.isBlank())
+            {
+
+                throw new InvalidRoleException("Students cannot have an employee ID.");
+            }
+
+        } else if (request.getRole() == Role.FACULTY)
+        {
+
+            if (employeeId == null || employeeId.isBlank())
+            {
+                throw new InvalidRoleException("Employee ID is required for faculty.");
+            }
+
+            if (userRepository.existsByEmployeeId(employeeId) ||
+                    pendingRegistrationRepository.existsByEmployeeId(employeeId))
+            {
+
+                throw new EmployeeIdAlreadyExistsException("Employee ID is already registered.");
+            }
+
+            if (rollNumber != null &&
+                    !rollNumber.isBlank())
+            {
+
+                throw new InvalidRoleException("Faculty cannot have a roll number.");
+            }
         }
 
         Optional<PendingRegistration> existingRegistration =
@@ -84,6 +137,8 @@ public class AuthService implements IAuthService
                 .email(request.getEmail())
                 .encodedPassword(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
+                .employeeId(employeeId)
+                .rollNumber(rollNumber)
                 .otp(otp)
                 .otpExpiry(LocalDateTime.now().plusMinutes(5))
                 .build();
@@ -148,6 +203,8 @@ public class AuthService implements IAuthService
                 .email(pendingRegistration.getEmail())
                 .password(pendingRegistration.getEncodedPassword()) // Already BCrypt encoded
                 .role(pendingRegistration.getRole())
+                .employeeId(pendingRegistration.getEmployeeId())
+                .rollNumber(pendingRegistration.getRollNumber())
                 .status(AccountStatus.PENDING)
                 .build();
 
@@ -175,6 +232,8 @@ public class AuthService implements IAuthService
                         .fullName(user.getFullName())
                         .email(user.getEmail())
                         .role(user.getRole())
+                        .rollNumber(user.getRollNumber())
+                        .employeeId(user.getEmployeeId())
                         .status(user.getStatus())
                         .createdAt(user.getCreatedAt())
                         .build())
