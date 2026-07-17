@@ -279,9 +279,11 @@ public class AuthService implements IAuthService
 
         return LoginResponse.builder()
                 .token(jwt)
+                .fullName(user.getFullName())
                 .type("Bearer")
                 .email(user.getEmail())
                 .role(user.getRole())
+                .status(user.getStatus())
                 .build();
     }
 
