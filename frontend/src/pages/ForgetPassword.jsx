@@ -51,7 +51,7 @@ function ForgotPassword() {
                       <p className="login-text">
                         Remember your password?
 
-                        <span onClick={() => navigate("/login")}>
+                        <span onClick={() => navigate("/")}>
                             {" "}Login
                         </span>
 
