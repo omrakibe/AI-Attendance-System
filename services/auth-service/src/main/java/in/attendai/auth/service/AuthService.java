@@ -337,12 +337,19 @@ public class AuthService implements IAuthService
         String jwt = jwtService.generateToken(new CustomUserDetails(user));
 
         return LoginResponse.builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .message("Login successful.")
                 .token(jwt)
+                .tokenType("Bearer")
+                .id(user.getId())
                 .fullName(user.getFullName())
-                .type("Bearer")
                 .email(user.getEmail())
                 .role(user.getRole())
-                .status(user.getStatus())
+                .accountStatus(user.getStatus())
+                .rollNumber(user.getRollNumber())
+                .employeeId(user.getEmployeeId())
+                .timestamp(LocalDateTime.now())
                 .build();
     }
 
