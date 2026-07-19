@@ -6,7 +6,7 @@ function InputField({
   onChange,
 }) {
   return (
-    <>
+    <div className="input-group">
       <label>{label}</label>
 
       <input
@@ -15,7 +15,7 @@ function InputField({
         value={value}
         onChange={onChange}
       />
-    </>
+    </div>
   );
 }
 
