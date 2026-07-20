@@ -46,3 +46,22 @@
 
     transform:rotate(-18deg);
 }
+@media (max-width: 425px) {
+
+    .header{
+        justify-content:flex-start;
+        padding:16px 20px;
+    }
+
+    .logo-wrapper{
+        margin-left:0;
+    }
+
+    .logo{
+        font-size:30px;
+    }
+
+    .cap-icon{
+        font-size:20px;
+    }
+}
