@@ -1,20 +1,21 @@
 package in.attendai.auth.entity;
 
-import in.attendai.auth.enums.AccountStatus;
 import in.attendai.auth.enums.Role;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
+@Table(name = "pending_registrations")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User extends BaseEntity
+public class PendingRegistration
 {
 
     @Id
@@ -28,25 +29,23 @@ public class User extends BaseEntity
     private String email;
 
     @Column(nullable = false)
-    private String password;
+    private String encodedPassword;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
 
-    @Column(unique = true)
     private String employeeId;
 
-    @Column(unique = true)
     private String rollNumber;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private AccountStatus status;
+    private String otp;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "approved_by")
-    private User approvedBy;
+    @Column(nullable = false)
+    private LocalDateTime otpExpiry;
 
-    private LocalDateTime approvedAt;
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
 }

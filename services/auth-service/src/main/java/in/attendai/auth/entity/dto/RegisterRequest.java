@@ -30,4 +30,8 @@ public class RegisterRequest
 
     @NotNull
     private Role role;
+
+    private String employeeId;
+
+    private String rollNumber;
 }
