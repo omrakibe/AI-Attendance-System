@@ -6,139 +6,194 @@
 }
 
 body{
-    background:#f4f6f9;
+    background:linear-gradient(
+        to bottom,
+        #ffffff 0%,
+        #fbf7ef 20%,
+        #F7F2E7 100%
+    );
 }
+
+/* ---------- Page ---------- */
 
 .login-container{
     display:flex;
     justify-content:center;
-    align-items:center;
-    height:100vh;
+    align-items:flex-start;
+    min-height:calc(100vh - 90px);
+    padding:30px 20px;
 }
+
+/* ---------- Card ---------- */
 
 .login-card{
-
-    width:380px;
-
-    background:white;
-
-    padding:40px;
-
-    border-radius:10px;
-
-    box-shadow:0px 0px 15px rgba(0,0,0,0.15);
+    width:470px;
+    background:#ffffff;
+    padding:35px;
+    border-radius:24px;
+    border:1px solid #E9E2D5;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
 }
 
-.login-card h1{
-
-    text-align:center;
-
-    color:#0d6efd;
-
-    margin-bottom:10px;
-}
+/* ---------- Heading ---------- */
 
 .login-card h2{
-
     text-align:center;
-    color:darkslategray ;
-    margin-bottom:30px;
-     margin-top: 30px;
+    color:#065F46;
+    font-size:38px;
+    font-weight:700;
+    margin-bottom:12px;
 }
 
-.login-card label{
-
-    display:block;
-
-    margin-top:15px;
-
-    margin-bottom:8px;
-
-    font-weight:bold;
-}
-
-.login-card input{
-
-    width:100%;
-
-    padding:12px;
-
-    border:1px solid #ccc;
-
-    border-radius:6px;
-}
-
-.login-card button{
-
-    width:100%;
-
-    margin-top:25px;
-
-    padding:12px;
-
-    border:none;
-
-    background:#0d6efd;
-
-    color:white;
-
-    border-radius:6px;
-
-    cursor:pointer;
-
+.subtitle{
+    text-align:center;
+    color:#4B5563;
     font-size:16px;
+    line-height:1.5;
+    margin-bottom:22px;
 }
 
-.login-card button:hover{
+/* ---------- Inputs ---------- */
 
-    background:#0b5ed7;
+.input-group{
+    width:100%;
+    margin-bottom:20px;
 }
 
-.forgot-password{
-
-    margin-top:15px;
-
-    color:#0d6efd;
-
-    cursor:pointer;
-
-    text-align:right;
+.input-group label{
+    display:block;
+    margin-bottom:6px;
+    font-size:17px;
+    font-weight:600;
+    color:#0A0E1A;
 }
 
-.register-text{
-
-    margin-top:20px;
-
-    text-align:center;
+.input-group input{
+    width:100%;
+    height:44px;
+    padding:0 14px;
+    border:1px solid #D9D4C8;
+    border-radius:12px;
+    background:#ffffff;
+    font-size:16px;
+    color:#0A0E1A;
+    outline:none;
+    transition:.25s ease;
 }
 
-.register-text span{
-
-    color:#0d6efd;
-
-    font-weight:bold;
-
-    cursor:pointer;
+.input-group input::placeholder{
+    color:#6B7280;
 }
+
+.input-group input:focus{
+    border-color:#065F46;
+    box-shadow:0 0 0 4px rgba(6,95,70,.15);
+}
+
+/* ---------- Password ---------- */
+
 .password-box{
     position:relative;
+    width:100%;
 }
 
 .password-box input{
     width:100%;
+    padding-right:45px;
 }
 
 .eye-icon{
-
     position:absolute;
-
-    right:15px;
-
+    right:14px;
     top:50%;
-
     transform:translateY(-50%);
-
     cursor:pointer;
+    color:#808080;
+    font-size:18px;
+}
 
-    color:gray;
+/* ---------- Forgot Password ---------- */
+
+.forgot-password{
+    text-align:right;
+    margin-top:-8px;
+    margin-bottom:20px;
+    font-size:16px;
+    font-weight:600;
+    color:#065F46;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.forgot-password:hover{
+    color:#0A0E1A;
+}
+
+/* ---------- Button ---------- */
+
+.login-card button{
+    width:100%;
+    height:48px;
+    margin-top:22px;
+    border:none;
+    border-radius:14px;
+    background:#0A0E1A;
+    color:#ffffff;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s ease;
+}
+
+.login-card button:hover{
+    background:#1E293B;
+    transform:translateY(-2px);
+}
+
+/* ---------- Register ---------- */
+
+.register-text{
+    margin-top:20px;
+    text-align:center;
+    font-size:17px;
+    color:#0A0E1A;
+}
+
+.register-text span{
+    color:#065F46;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s ease;
+}
+
+.register-text span:hover{
+    color:#0A0E1A;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width:768px){
+
+    .login-container{
+        padding:30px 15px;
+    }
+
+    .login-card{
+        width:100%;
+        max-width:420px;
+        padding:28px;
+    }
+
+    .login-card h2{
+        font-size:34px;
+    }
+
+    .input-group input{
+        height:42px;
+    }
+
+    .login-card button{
+        height:46px;
+        font-size:17px;
+    }
 }

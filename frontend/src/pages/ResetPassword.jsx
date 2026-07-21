@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
 import "./../styles/ResetPassword.css";
@@ -28,51 +29,52 @@ function ResetPassword() {
   };
 
   return (
+    <>
+      <Header />
 
-    <div className="reset-container">
+      <div className="reset-container">
 
-      <div className="reset-card">
+        <div className="reset-card">
 
-        <h1>AttendAI</h1>
+          <h2>Reset Password</h2>
 
-        <h2>Reset Password</h2>
+          <form onSubmit={handleResetPassword}>
 
-        <form onSubmit={handleResetPassword}>
+            <InputField
+              label="Email"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
+            />
 
-          <InputField
-            label="Email"
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e)=>setEmail(e.target.value)}
-          />
+            <InputField
+              label="OTP"
+              type="text"
+              placeholder="Enter OTP"
+              value={otp}
+              onChange={(e)=>setOtp(e.target.value)}
+            />
 
-          <InputField
-            label="OTP"
-            type="text"
-            placeholder="Enter OTP"
-            value={otp}
-            onChange={(e)=>setOtp(e.target.value)}
-          />
+            <InputField
+              label="New Password"
+              type="password"
+              placeholder="Enter new password"
+              value={newPassword}
+              onChange={(e)=>setNewPassword(e.target.value)}
+            />
 
-          <InputField
-            label="New Password"
-            type="password"
-            placeholder="Enter new password"
-            value={newPassword}
-            onChange={(e)=>setNewPassword(e.target.value)}
-          />
+            <Button
+              text="Reset Password"
+              type="submit"
+            />
 
-          <Button
-            text="Reset Password"
-            type="submit"
-          />
+          </form>
 
-        </form>
+        </div>
 
       </div>
-
-    </div>
+    </>
   );
 }
 

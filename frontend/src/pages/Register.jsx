@@ -4,6 +4,8 @@ import { useState } from "react";
 import { registerUser } from "../services/authService";
 import InputField from "../components/InputField";
 import Button from "../components/Button";
+import Header from "../components/Header";
+import "../styles/Header.css";
 
 
 
@@ -17,6 +19,9 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("STUDENT");
+  
+  const [rollNumber, setRollNumber] = useState("");
+  const [employeeId, setEmployeeId] = useState("");
    
   const handleRegister = async (e) => {
   e.preventDefault();
@@ -27,6 +32,14 @@ function Register() {
     password,
     role,
   };
+  
+  if (role === "STUDENT") {
+    userData.rollNumber = rollNumber;
+  }
+
+  if (role === "FACULTY") {
+    userData.employeeId = employeeId;
+  }
 
   try {
     const response = await registerUser(userData);
@@ -45,67 +58,102 @@ function Register() {
   }
 };
   return (
-    <div className="register-container">
+    <>
+      <Header />
+      <div className="login-container">
+         <div className="register-container">
+           <div className="register-card">
 
-      <div className="register-card">
+             <h2>Register</h2>
+              <p className="subtitle">
+                  Create your AttendAI account.
+              </p>
+             <form onSubmit={handleRegister}>
 
-        <h1>AttendAI</h1>
+             <label>Full Name</label>
+             <input
+                type="text"
+                placeholder="Enter your full name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+             />
 
-        <h2>Register</h2>
+            <label>Email</label>
+            <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
 
-       <form onSubmit={handleRegister}>
+            <label>Password</label>
+            <input
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
 
-  <label>Full Name</label>
-  <input
-    type="text"
-    placeholder="Enter your full name"
-    value={fullName}
-    onChange={(e) => setFullName(e.target.value)}
-  />
+            <label>Role</label>
 
-  <label>Email</label>
-  <input
-    type="email"
-    placeholder="Enter your email"
-    value={email}
-    onChange={(e) => setEmail(e.target.value)}
-  />
+            <select
+             value={role}
+             onChange={(e) => {
+               const selectedRole = e.target.value;
+               setRole(selectedRole);
 
-  <label>Password</label>
-  <input
-    type="password"
-    placeholder="Enter your password"
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-  />
+               if (selectedRole === "STUDENT") {
+                   setEmployeeId("");
+               } else {
+                   setRollNumber("");
+               }
+             }}
+            >
+              <option value="STUDENT">STUDENT</option>
+              <option value="FACULTY">FACULTY</option>
+            </select>
+                  {role === "STUDENT" && (
+                     <>
+                        <label>Roll Number</label>
 
-  <label>Role</label>
+                        <input
+                            type="text"
+                            placeholder="Enter your roll number"
+                            value={rollNumber}
+                            onChange={(e) => setRollNumber(e.target.value)}
+                        />
+                     </>
+                   )}
 
-  <select
-    value={role}
-    onChange={(e) => setRole(e.target.value)}
-  >
-    <option value="STUDENT">STUDENT</option>
-    <option value="FACULTY">FACULTY</option>
-  </select>
+                  {role === "FACULTY" && (
+                     <>
+                        <label>Employee ID</label>
 
-  <Button
-  text="Register"
-  type="submit"
-/>
+                        <input
+                            type="text"
+                            placeholder="Enter your employee ID"
+                            value={employeeId}
+                            onChange={(e) => setEmployeeId(e.target.value)}
+                        />
+                     </>
+                   )}
+                 <Button
+                    text="Register"
+                    type="submit"
+                 />
 
-  <p className="login-text">
-    Already have an account?
-    <span onClick={() => navigate("/")}>
-      {" "}Login
-    </span>
-  </p>
+            <p className="login-text">
+              Already have an account?
+              <span onClick={() => navigate("/")}>
+                {" "}Login
+              </span>
+            </p>
 
-</form>
-
+             </form>
+            </div>
+         </div>
       </div>
-
-    </div>
+    </>
   );
 }
 
