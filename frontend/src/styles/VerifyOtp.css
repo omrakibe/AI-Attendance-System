@@ -6,107 +6,141 @@
 }
 
 body{
-    background:#f4f6f9;
+    background:#F7F2E7;
 }
 
 .verify-container{
     display:flex;
     justify-content:center;
-    align-items:center;
-    height:100vh;
+    align-items:flex-start;
+    min-height:calc(100vh - 90px);
+    padding:30px 20px;
 }
 
 .verify-card{
-
-    width:400px;
-
-    background:white;
-
-    padding:40px;
-
-    border-radius:10px;
-
-    box-shadow:0 0 15px rgba(0,0,0,.15);
-}
-
-.verify-card h1{
-
-    text-align:center;
-
-    color:#0d6efd;
-
-    margin-bottom:10px;
+    width:470px;
+    background:#ffffff;
+    padding:35px;
+    border-radius:24px;
+    border:1px solid #E9E2D5;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
 }
 
 .verify-card h2{
-
     text-align:center;
-    color: darkslategrey;
-    margin-bottom:30px;
-    margin-top: 30px;
+    color:#065F46;
+    font-size:38px;
+    font-weight:700;
+    margin-bottom:22px;
 }
 
-.verify-card label{
 
+
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group label{
     display:block;
-
-    margin-top:15px;
-
-    margin-bottom:8px;
-
-    font-weight:bold;
+    margin-bottom:6px;
+    font-size:17px;
+    font-weight:600;
+    color:#0A0E1A;
 }
 
-.verify-card input,
-.verify-card select{
-
+.input-group input{
     width:100%;
-
-    padding:12px;
-
-    border:1px solid #ccc;
-
-    border-radius:6px;
+    height:44px;
+    padding:0 14px;
+    border:1px solid #D9D4C8;
+    border-radius:12px;
+    background:#ffffff;
+    font-size:16px;
+    color:#0A0E1A;
+    outline:none;
+    transition:.25s ease;
 }
+
+.input-group input::placeholder{
+    color:#6B7280;
+}
+
+.input-group input:focus{
+    border-color:#065F46;
+    box-shadow:0 0 0 4px rgba(6,95,70,.15);
+}
+
+
 
 .verify-card button{
-
     width:100%;
-
-    margin-top:25px;
-
-    padding:12px;
-
+    height:48px;
+    margin-top:22px;
     border:none;
-
-    background:#0d6efd;
-
-    color:white;
-
-    border-radius:6px;
-
+    border-radius:14px;
+    background:#0A0E1A;
+    color:#ffffff;
+    font-size:18px;
+    font-weight:600;
     cursor:pointer;
-
-    font-size:16px;
+    transition:.3s ease;
 }
 
 .verify-card button:hover{
-
-    background:#0b5ed7;
+    background:#1E293B;
+    transform:translateY(-2px);
 }
 
+
+
 .login-text{
-
     margin-top:20px;
-
     text-align:center;
+    font-size:17px;
+    color:#0A0E1A;
 }
 
 .login-text span{
-
-    color:#0d6efd;
-
+    color:#065F46;
+    font-weight:600;
     cursor:pointer;
+    transition:.25s ease;
+}
 
-    font-weight:bold;
+.login-text span:hover{
+    color:#0A0E1A;
+}
+
+.subtitle{
+    text-align:center;
+    color:#6B7280;
+    font-size:16px;
+    margin-bottom:24px;
+}
+
+
+@media (max-width:768px){
+
+    .verify-container{
+        padding:30px 15px;
+    }
+
+    .verify-card{
+        width:100%;
+        max-width:420px;
+        padding:28px;
+    }
+
+    .verify-card h2{
+        font-size:34px;
+    }
+
+    .input-group input{
+        height:42px;
+    }
+
+    .verify-card button{
+        height:46px;
+        font-size:17px;
+    }
 }

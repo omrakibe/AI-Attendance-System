@@ -26,3 +26,17 @@ export const registerUser = async (userData) => {
     throw error;
   }
 };
+
+// Verify OTP API
+export const verifyOtp = async (email, otp) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/verify-otp`, {
+      email,
+      otp,
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

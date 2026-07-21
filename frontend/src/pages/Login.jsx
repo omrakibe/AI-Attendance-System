@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import Header from "../components/Header";
 
 import "../styles/Login.css";
+import { loginUser } from "../services/authService";
 
 function Login() {
   const navigate = useNavigate();
@@ -15,14 +16,38 @@ function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = (e) => {
+const handleLogin = async (e) => {
     e.preventDefault();
 
-    console.log({
-      email,
-      password,
-    });
-  };
+    try {
+        const response = await loginUser(email, password);
+
+        console.log(response);
+
+        alert(response.message);
+
+        // Store JWT token
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("role", response.role);
+        localStorage.setItem("fullName", response.fullName);
+
+        // Redirect based on role
+        if (response.role === "STUDENT") {
+            navigate("/student-dashboard");
+        } else if (response.role === "FACULTY") {
+            navigate("/faculty-dashboard");
+        }
+
+    } catch (error) {
+
+        if (error.response) {
+            alert(error.response.data.message);
+        } else {
+            alert("Unable to connect to server.");
+        }
+
+    }
+};
 
   return (
     <>
