@@ -19,6 +19,9 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("STUDENT");
+  
+  const [rollNumber, setRollNumber] = useState("");
+  const [employeeId, setEmployeeId] = useState("");
    
   const handleRegister = async (e) => {
   e.preventDefault();
@@ -29,6 +32,14 @@ function Register() {
     password,
     role,
   };
+  
+  if (role === "STUDENT") {
+    userData.rollNumber = rollNumber;
+  }
+
+  if (role === "FACULTY") {
+    userData.employeeId = employeeId;
+  }
 
   try {
     const response = await registerUser(userData);
@@ -86,17 +97,50 @@ function Register() {
             <label>Role</label>
 
             <select
-               value={role}
-               onChange={(e) => setRole(e.target.value)}
+             value={role}
+             onChange={(e) => {
+               const selectedRole = e.target.value;
+               setRole(selectedRole);
+
+               if (selectedRole === "STUDENT") {
+                   setEmployeeId("");
+               } else {
+                   setRollNumber("");
+               }
+             }}
             >
               <option value="STUDENT">STUDENT</option>
               <option value="FACULTY">FACULTY</option>
             </select>
+                  {role === "STUDENT" && (
+                     <>
+                        <label>Roll Number</label>
 
-            <Button
-              text="Register"
-              type="submit"
-            />
+                        <input
+                            type="text"
+                            placeholder="Enter your roll number"
+                            value={rollNumber}
+                            onChange={(e) => setRollNumber(e.target.value)}
+                        />
+                     </>
+                   )}
+
+                  {role === "FACULTY" && (
+                     <>
+                        <label>Employee ID</label>
+
+                        <input
+                            type="text"
+                            placeholder="Enter your employee ID"
+                            value={employeeId}
+                            onChange={(e) => setEmployeeId(e.target.value)}
+                        />
+                     </>
+                   )}
+                 <Button
+                    text="Register"
+                    type="submit"
+                 />
 
             <p className="login-text">
               Already have an account?

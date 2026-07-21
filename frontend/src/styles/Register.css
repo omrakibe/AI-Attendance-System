@@ -54,11 +54,12 @@ body{
     width:100%;
     height:44px;
     padding:0 14px;
-    border:1px solid #d7d2c8;
+    border:1px solid #D9D4C8;
     border-radius:12px;
     background:#ffffff;
     font-size:16px;
     color:#0A0E1A;
+    outline:none;
     transition:0.25s ease;
 }
 
