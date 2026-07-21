@@ -43,8 +43,12 @@ function VerifyOtp() {
       <div className="verify-card">
 
         <h2>Verify OTP</h2>
+      
+       <p className="subtitle">
+             Enter the OTP sent to your email.
+       </p>
 
-        <form onSubmit={handleVerify}>
+       <form onSubmit={handleVerify}>
 
           <InputField
             label="Email"
