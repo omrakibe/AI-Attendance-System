@@ -5,23 +5,33 @@ import Button from "../components/Button";
 import "../styles/ForgotPassword.css";
 import Header from "../components/Header";
 import "../styles/Header.css";
+import { forgotPassword } from "../services/authService";
 
 function ForgotPassword() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
 
-  const handleForgotPassword = (e) => {
-    e.preventDefault();
+  const handleForgotPassword = async (e) => {
+     e.preventDefault();
 
-    console.log({
-      email,
-    });
+     try {
+        const response = await forgotPassword(email);
 
-    alert("OTP Sent Successfully");
+        alert(response.message);
 
-    navigate("/reset-password");
-  };
+        navigate("/verify-otp");
+
+      } catch (error) {
+
+        if (error.response) {
+            alert(error.response.data.message);
+        } else {
+            alert("Unable to connect to server.");
+      }
+
+      }
+};
 
   return (
     <>

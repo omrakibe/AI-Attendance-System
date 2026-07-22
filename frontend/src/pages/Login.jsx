@@ -16,7 +16,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-const handleLogin = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
@@ -30,6 +30,7 @@ const handleLogin = async (e) => {
         localStorage.setItem("token", response.token);
         localStorage.setItem("role", response.role);
         localStorage.setItem("fullName", response.fullName);
+        localStorage.setItem("email", response.email);
 
         // Redirect based on role
         if (response.role === "STUDENT") {
