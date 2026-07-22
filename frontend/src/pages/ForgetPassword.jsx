@@ -20,7 +20,7 @@ function ForgotPassword() {
 
         alert(response.message);
 
-        navigate("/verify-otp");
+        navigate("/reset-password");
 
       } catch (error) {
 
