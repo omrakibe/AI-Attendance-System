@@ -40,3 +40,31 @@ export const verifyOtp = async (email, otp) => {
     throw error;
   }
 };
+
+// Forgot Password API
+export const forgotPassword = async (email) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/forgot-password`, {
+      email,
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Reset Password API
+export const resetPassword = async (email, otp, newPassword) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/reset-password`, {
+      email,
+      otp,
+      newPassword,
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
