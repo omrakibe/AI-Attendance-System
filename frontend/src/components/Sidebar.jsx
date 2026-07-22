@@ -42,10 +42,22 @@ function Sidebar() {
         Reports
       </NavLink>
 
-      <NavLink to="/">
-        <FaSignOutAlt />
-        Logout
-      </NavLink>
+      <button
+    className="logout-btn"
+    onClick={() => {
+
+        localStorage.clear();
+
+        window.location.href = "/";
+
+    }}
+>
+
+    <FaSignOutAlt />
+
+    Logout
+
+</button>
 
     </div>
   );

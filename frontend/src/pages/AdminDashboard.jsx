@@ -7,6 +7,7 @@ import {
   FaChalkboardTeacher,
   FaUserClock,
   FaClipboardCheck,
+  FaUserShield,
 } from "react-icons/fa";
 
 import "../styles/AdminDashboard.css";
@@ -24,7 +25,7 @@ function AdminDashboard() {
 
   <div className="welcome-section">
 
-    <h1>Welcome Back 👋</h1>
+    <h1>Welcome Back </h1>
 
     <p>
       Manage students, faculty, attendance and reports from one place.
@@ -36,7 +37,7 @@ function AdminDashboard() {
 
     <DashboardCard
       title="Students"
-      value="250"
+      value="75"
       icon={<FaUserGraduate />}
     />
 

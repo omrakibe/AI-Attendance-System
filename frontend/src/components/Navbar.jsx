@@ -7,9 +7,10 @@ function Navbar() {
       <h2>Dashboard</h2>
 
       <div className="profile">
-
-        <span>👋 Admin</span>
-
+       
+       
+        <span>Admin</span>
+       
       </div>
 
     </div>
