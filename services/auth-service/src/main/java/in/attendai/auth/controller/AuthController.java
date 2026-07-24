@@ -79,6 +79,11 @@ public class AuthController
         return ResponseEntity.ok(authService.resetPassword(request));
     }
 
+    @GetMapping("/internal/users/{id}")
+    public ResponseEntity<InternalUserResponse> getUsers(@PathVariable Long id)
+    {
+        return ResponseEntity.ok(authService.getUsers(id));
+    }
 //    @GetMapping("/test-email")
 //    public String testEmail()
 //    {

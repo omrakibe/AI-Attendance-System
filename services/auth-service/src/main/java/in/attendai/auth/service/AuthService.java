@@ -241,6 +241,25 @@ public class AuthService implements IAuthService
     }
 
     @Override
+    public InternalUserResponse getUsers(Long id)
+    {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() ->
+                        new UserNotFoundException("User not found with ID: " + id));
+
+        return InternalUserResponse.builder()
+                .id(user.getId())
+                .fullName(user.getFullName())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .status(user.getStatus())
+                .rollNumber(user.getRollNumber())
+                .employeeId(user.getEmployeeId())
+                .build();
+    }
+
+    @Override
     @Transactional
     public ApiResponse approveUser(Long userId)
     {

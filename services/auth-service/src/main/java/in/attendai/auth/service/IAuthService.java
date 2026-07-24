@@ -21,4 +21,6 @@ public interface IAuthService
     ApiResponse forgotPassword(ForgotPasswordRequest request);
 
     ApiResponse resetPassword(ResetPasswordRequest request);
+
+    InternalUserResponse getUsers(Long id);
 }

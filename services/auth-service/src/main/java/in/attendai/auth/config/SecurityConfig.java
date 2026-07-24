@@ -48,6 +48,7 @@ public class SecurityConfig
                                 "/api/auth/verify-otp",
                                 "/api/auth/forgot-password",
                                 "/api/auth/reset-password",
+                                "/api/auth/internal/users/{id}",
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**"
@@ -65,7 +66,8 @@ public class SecurityConfig
     }
 
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+    public CorsConfigurationSource corsConfigurationSource()
+    {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
