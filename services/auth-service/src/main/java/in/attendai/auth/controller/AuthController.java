@@ -36,13 +36,13 @@ public class AuthController
         return ResponseEntity.ok(authService.getPendingUsers());
     }
 
-    @PutMapping("/approve/{userId}")
+    @PatchMapping("/approve/{userId}")
     public ResponseEntity<ApiResponse> approveUser(@PathVariable Long userId)
     {
         return ResponseEntity.ok(authService.approveUser(userId));
     }
 
-    @PutMapping("/reject/{userId}")
+    @PatchMapping("/reject/{userId}")
     public ResponseEntity<ApiResponse> rejectUser(@PathVariable Long userId)
     {
         return ResponseEntity.ok(authService.rejectUser(userId));

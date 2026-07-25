@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import DashboardCard from "../components/DashboardCard";
 import { Outlet, useLocation } from "react-router-dom";
 import AttendanceChart from "../components/AttendanceChart";
-import RecentActivity from "../components/RecentActivity";
+// import RecentActivity from "../components/RecentActivity";
 import {
   FaUserGraduate,
   FaChalkboardTeacher,
@@ -80,7 +80,7 @@ function AdminDashboard() {
 
               </div>
               <AttendanceChart />
-              <RecentActivity />
+              {/*<RecentActivity />*/}
             </>
           )}
 
