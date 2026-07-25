@@ -2,69 +2,105 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8081/api/auth";
 
-// Login API
-export const loginUser = async (email, password) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/login`, {
-      email,
-      password,
-    });
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// Register API
+// ===============================
+// Register User
+// ===============================
 export const registerUser = async (userData) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/register`, userData);
-
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  const response = await axios.post(`${BASE_URL}/register`, userData);
+  return response.data;
 };
 
-// Verify OTP API
+// ===============================
+// Login User
+// ===============================
+export const loginUser = async (email, password) => {
+  const response = await axios.post(`${BASE_URL}/login`, {
+    email,
+    password,
+  });
+
+  return response.data;
+};
+
+// ===============================
+// Verify OTP
+// ===============================
 export const verifyOtp = async (email, otp) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/verify-otp`, {
-      email,
-      otp,
-    });
+  const response = await axios.post(`${BASE_URL}/verify-otp`, {
+    email,
+    otp,
+  });
 
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  return response.data;
 };
 
-// Forgot Password API
+// ===============================
+// Forgot Password
+// ===============================
 export const forgotPassword = async (email) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/forgot-password`, {
-      email,
-    });
+  const response = await axios.post(`${BASE_URL}/forgot-password`, {
+    email,
+  });
 
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  return response.data;
 };
 
-// Reset Password API
+// ===============================
+// Reset Password
+// ===============================
 export const resetPassword = async (email, otp, newPassword) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/reset-password`, {
-      email,
-      otp,
-      newPassword,
-    });
+  const response = await axios.post(`${BASE_URL}/reset-password`, {
+    email,
+    otp,
+    newPassword,
+  });
 
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  return response.data;
+};
+
+// ===============================
+// Get Pending Users (Admin)
+// ===============================
+export const getPendingUsers = async () => {
+  const response = await axios.get(`${BASE_URL}/pending-users`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
+  return response.data;
+};
+
+// ===============================
+// Approve User (Admin)
+// ===============================
+export const approveUser = async (id) => {
+  const response = await axios.patch(
+    `${BASE_URL}/approve/${id}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  return response.data;
+};
+
+// ===============================
+// Reject User (Admin)
+// ===============================
+export const rejectUser = async (id) => {
+  const response = await axios.patch(
+    `${BASE_URL}/reject/${id}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+
+  return response.data;
 };
