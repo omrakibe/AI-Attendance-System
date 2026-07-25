@@ -8,7 +8,6 @@ spring:
           uri: https://github.com/omrakibe/AI-Attendance-Config.git
           username: omrakibe
           password: ${GITHUB_PAT}
-
 eureka:
   client:
     service-url:
