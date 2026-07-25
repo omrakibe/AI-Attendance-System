@@ -22,32 +22,63 @@ function PendingUsers() {
       const data = await getPendingUsers();
       setUsers(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      alert("Unable to fetch pending users.");
     }
   };
 
   const handleApprove = async (id) => {
-    await approveUser(id);
-    fetchUsers();
+    try {
+      const response = await approveUser(id);
+
+      alert(response.message);
+
+      fetchUsers();
+
+    } catch (error) {
+
+      alert(
+        error.response?.data?.message ||
+        "Unable to approve user."
+      );
+
+    }
   };
 
   const handleReject = async (id) => {
-    await rejectUser(id);
-    fetchUsers();
+    try {
+      const response = await rejectUser(id);
+
+      alert(response.message);
+
+      fetchUsers();
+
+    } catch (error) {
+
+      alert(
+        error.response?.data?.message ||
+        "Unable to reject user."
+      );
+
+    }
   };
 
   const filteredUsers = users.filter((user) => {
+
     const matchesSearch =
       user.fullName.toLowerCase().includes(search.toLowerCase()) ||
       user.email.toLowerCase().includes(search.toLowerCase());
 
     const matchesRole =
-      roleFilter === "ALL" || user.role === roleFilter;
+      roleFilter === "ALL" ||
+      user.role === roleFilter;
 
     return matchesSearch && matchesRole;
+
   });
 
   return (
+
     <div className="pending-container">
 
       <div className="pending-header">
@@ -58,7 +89,7 @@ function PendingUsers() {
 
           <input
             type="text"
-            placeholder="Search users..."
+            placeholder="Search Users..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -67,9 +98,11 @@ function PendingUsers() {
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
           >
+
             <option value="ALL">All Roles</option>
             <option value="STUDENT">Student</option>
             <option value="FACULTY">Faculty</option>
+
           </select>
 
         </div>
@@ -85,7 +118,6 @@ function PendingUsers() {
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
-            <th>ID</th>
             <th>Status</th>
             <th>Action</th>
 
@@ -99,7 +131,7 @@ function PendingUsers() {
 
             <tr>
 
-              <td colSpan="6">
+              <td colSpan="5">
 
                 No Pending Users
 
@@ -121,14 +153,6 @@ function PendingUsers() {
 
                 <td>
 
-                  {user.role === "STUDENT"
-                    ? user.rollNumber
-                    : user.employeeId}
-
-                </td>
-
-                <td>
-
                   <span className="status">
 
                     {user.status}
@@ -143,14 +167,18 @@ function PendingUsers() {
                     className="approve-btn"
                     onClick={() => handleApprove(user.id)}
                   >
+
                     Approve
+
                   </button>
 
                   <button
                     className="reject-btn"
                     onClick={() => handleReject(user.id)}
                   >
+
                     Reject
+
                   </button>
 
                 </td>
@@ -166,6 +194,7 @@ function PendingUsers() {
       </table>
 
     </div>
+
   );
 }
 
