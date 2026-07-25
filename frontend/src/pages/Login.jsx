@@ -9,6 +9,7 @@ import Header from "../components/Header";
 import { loginUser } from "../services/authService";
 
 import "../styles/Login.css";
+import { loginUser } from "../services/authService";
 
 function Login() {
   const navigate = useNavigate();
