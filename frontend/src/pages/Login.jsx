@@ -6,6 +6,8 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import Header from "../components/Header";
 
+import { loginUser } from "../services/authService";
+
 import "../styles/Login.css";
 
 function Login() {
@@ -15,13 +17,64 @@ function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    console.log({
-      email,
-      password,
-    });
+    try {
+      const response = await loginUser(email, password);
+
+      // Save JWT Token
+      localStorage.setItem("token", response.token);
+
+      // Save User Details
+      localStorage.setItem("id", response.id);
+      localStorage.setItem("fullName", response.fullName);
+      localStorage.setItem("email", response.email);
+      localStorage.setItem("role", response.role);
+      localStorage.setItem("accountStatus", response.accountStatus);
+
+      // Student Data
+      if (response.role === "STUDENT") {
+        localStorage.setItem("rollNumber", response.rollNumber);
+      }
+
+      // Faculty Data
+      if (response.role === "FACULTY") {
+        localStorage.setItem("employeeId", response.employeeId);
+      }
+
+      alert(response.message);
+
+      console.log(response);
+
+      // Redirect According to Role
+      switch (response.role) {
+        case "ADMIN":
+          navigate("/admin");
+          break;
+
+        case "FACULTY":
+          navigate("/faculty");
+          break;
+
+        case "STUDENT":
+          navigate("/student");
+          break;
+
+        default:
+          navigate("/");
+      }
+
+    } catch (error) {
+
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Unable to connect to server.");
+      }
+
+      console.error(error);
+    }
   };
 
   return (
@@ -29,6 +82,7 @@ function Login() {
       <Header />
 
       <div className="login-container">
+
         <div className="login-card">
 
           <h2>Login</h2>
@@ -48,9 +102,11 @@ function Login() {
             />
 
             <div className="input-group">
+
               <label>Password</label>
 
               <div className="password-box">
+
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
@@ -64,7 +120,9 @@ function Login() {
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
+
               </div>
+
             </div>
 
             <p
@@ -74,7 +132,10 @@ function Login() {
               Forgot Password?
             </p>
 
-            <Button text="Login" type="submit" />
+            <Button
+              text="Login"
+              type="submit"
+            />
 
             <p className="register-text">
               Don't have an account?{" "}
@@ -86,6 +147,7 @@ function Login() {
           </form>
 
         </div>
+
       </div>
     </>
   );
