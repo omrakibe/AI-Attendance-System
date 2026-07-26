@@ -1,0 +1,69 @@
+.activity-card{
+
+    margin-top:35px;
+
+    background:#ffffff;
+
+    border:1px solid #E9E2D5;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+}
+
+.activity-card h2{
+
+    color:#065F46;
+
+    margin-bottom:25px;
+
+    font-size:28px;
+
+}
+
+.activity-item{
+
+    display:flex;
+
+    gap:18px;
+
+    align-items:flex-start;
+
+    margin-bottom:22px;
+
+}
+
+.activity-dot{
+
+    width:14px;
+
+    height:14px;
+
+    border-radius:50%;
+
+    background:#065F46;
+
+    margin-top:6px;
+
+}
+
+.activity-item h4{
+
+    color:#0A0E1A;
+
+    font-size:17px;
+
+    margin-bottom:5px;
+
+}
+
+.activity-item p{
+
+    color:#6B7280;
+
+    font-size:14px;
+
+}
