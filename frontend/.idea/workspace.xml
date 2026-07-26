@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="55afdca7-e3d1-4344-b7f1-2a32d7a4fc5c" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;omrakibe&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/omrakibe/AI-Attendance-System.git&quot;,
+    &quot;accountId&quot;: &quot;ea6450ed-dedd-4777-9ebc-298c791c6195&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0000059649744468" />
+      <entry key="S60" value="1.0048852880929229" />
+      <entry key="M2" value="1.1441603942199279" />
+      <entry key="M5" value="3.1755301422566307" />
+      <entry key="M10" value="11.312518608679088" />
+      <entry key="M15" value="19.765416070678324" />
+      <entry key="M30" value="36.09804654296479" />
+      <entry key="H1" value="49.38816031141968" />
+      <entry key="H2" value="57.91029768916848" />
+      <entry key="H4" value="62.74204633351589" />
+      <entry key="D1" value="67.0924966451694" />
+      <entry key="W1" value="67.86957162951155" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="6.313793353409539E-285" />
+      <entry key="S5" value="2.089854955975059E-114" />
+      <entry key="S10" value="1.4456330640847466E-57" />
+      <entry key="S30" value="1.1307137955210164E-19" />
+      <entry key="S60" value="3.362608801988438E-10" />
+      <entry key="M2" value="1.8337417489898742E-5" />
+      <entry key="M5" value="0.012744865866470752" />
+      <entry key="M10" value="0.11289316129186358" />
+      <entry key="M15" value="0.23358507487507152" />
+      <entry key="M30" value="0.4833063985455516" />
+      <entry key="H1" value="0.6952024155205103" />
+      <entry key="H2" value="0.8337879919502965" />
+      <entry key="H4" value="0.9131199219983637" />
+      <entry key="D1" value="0.984966144365958" />
+      <entry key="W1" value="0.9978383383910834" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.8122523963562355" />
+      <entry key="MS500" value="0.9592641193252643" />
+      <entry key="S2" value="0.989656656415207" />
+      <entry key="S5" value="0.9958497530944581" />
+      <entry key="S10" value="0.9979227189990506" />
+      <entry key="S30" value="0.9993129096160303" />
+      <entry key="S60" value="1.0044772501339159" />
+      <entry key="M2" value="1.1431176208750942" />
+      <entry key="M5" value="3.1853398131132047" />
+      <entry key="M10" value="11.421954147264476" />
+      <entry key="M15" value="19.995704115034645" />
+      <entry key="M30" value="36.57886613749892" />
+      <entry key="H1" value="50.081801355072606" />
+      <entry key="H2" value="58.743205847647786" />
+      <entry key="H4" value="63.65469857314694" />
+      <entry key="D1" value="68.07738070459864" />
+      <entry key="W1" value="68.8673981362656" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3GoJd2SZ5xqWEFUHxovsbeh3Oa0" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "feature/attendance-service",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/om-rakibe/Desktop/Languages/JAVA/Telusko/SPRING/Spring Projects/AI-Attendance-System/frontend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-63390994e64e-intellij.indexing.shared.core-IU-262.8665.337" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.8665.337" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="StructureViewState">
+    <option name="selectedTab" value="Logical" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="55afdca7-e3d1-4344-b7f1-2a32d7a4fc5c" name="Changes" comment="" />
+      <created>1784632071943</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1784632071943</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
