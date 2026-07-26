@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 
 import { NavLink } from "react-router-dom";
-
+import { FaBook } from "react-icons/fa";
 import "../styles/Sidebar.css";
 
 function Sidebar() {
@@ -21,6 +21,14 @@ function Sidebar() {
         <FaTachometerAlt />
         Dashboard
       </NavLink>
+
+      <NavLink
+  to="/admin/subjects"
+  className={({ isActive }) => (isActive ? "active-link" : "")}
+>
+  <FaBook />
+  <span>Subjects</span>
+</NavLink>
 
       <NavLink to="/admin/students">
         <FaUserGraduate />

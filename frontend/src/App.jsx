@@ -10,7 +10,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import PendingUsers from "./pages/PendingUsers";
 import Students from "./pages/Students";
 import Faculty from "./pages/Faculty";
-
+import Subjects from "./pages/Subjects";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -35,6 +35,10 @@ function App() {
           index
           element={<h2>Welcome to Admin Dashboard</h2>}
         />
+        <Route
+    path="subjects"
+    element={<Subjects />}
+/>
 
         <Route
           path="students"
