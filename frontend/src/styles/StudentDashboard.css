@@ -1,0 +1,168 @@
+/* ===========================
+   Student Dashboard Layout
+=========================== */
+
+.student-dashboard{
+    display:flex;
+    min-height:100vh;
+    background:#F7F2E7;
+}
+
+/* ===========================
+   Main Content
+=========================== */
+
+.dashboard-content{
+    flex:1;
+    padding:30px;
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+/* ===========================
+   Welcome Section
+=========================== */
+
+.welcome-section h1{
+    font-size:38px;
+    color:#065F46;
+    margin-bottom:8px;
+    font-weight:700;
+}
+
+.welcome-section p{
+    font-size:18px;
+    color:#6B7280;
+}
+
+/* ===========================
+   Statistics Section
+=========================== */
+
+.stats-section{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+}
+
+.stat-card{
+    background:#ffffff;
+    border-radius:24px;
+    padding:28px;
+    min-height:150px;
+    border:1px solid #E9E2D5;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+/* ===========================
+   Middle Section
+=========================== */
+
+.middle-section{
+    display:grid;
+    grid-template-columns:2fr 2fr 1.2fr;
+    gap:22px;
+}
+
+.subject-attendance,
+.attendance-trend,
+.attendance-alert{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    border:1px solid #E9E2D5;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+    padding:28px;
+}
+
+.subject-attendance{
+    min-height:420px;
+}
+
+.attendance-trend{
+    min-height:420px;
+}
+
+.attendance-alert{
+    min-height:420px;
+}
+
+/* ===========================
+   Bottom Section
+=========================== */
+
+.bottom-section{
+    display:grid;
+    grid-template-columns:2fr 2fr 1.2fr;
+    gap:22px;
+}
+
+.recent-attendance,
+.quick-actions,
+.ai-assistant{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    border:1px solid #E9E2D5;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+    padding:28px;
+}
+
+.recent-attendance{
+    min-height:320px;
+}
+
+.quick-actions{
+    min-height:320px;
+}
+
+.ai-assistant{
+    min-height:320px;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width:1200px){
+
+    .stats-section{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .middle-section{
+        grid-template-columns:1fr;
+    }
+
+    .bottom-section{
+        grid-template-columns:1fr;
+    }
+}
+
+@media (max-width:768px){
+
+    .dashboard-content{
+        padding:20px;
+    }
+
+    .stats-section{
+        grid-template-columns:1fr;
+    }
+
+    .welcome-section h1{
+        font-size:30px;
+    }
+
+    .welcome-section p{
+        font-size:16px;
+    }
+}
