@@ -8,7 +8,8 @@ import lombok.*;
 
 @Getter
 @Setter
-public class UpdateSubjectRequest {
+public class UpdateSubjectRequest
+{
 
     @NotBlank
     private String subjectName;
@@ -22,7 +23,7 @@ public class UpdateSubjectRequest {
     private Integer semester;
 
     @NotNull
-    private Long facultyId;
+    private String facultyId;
 
     @NotNull
     private Boolean active;

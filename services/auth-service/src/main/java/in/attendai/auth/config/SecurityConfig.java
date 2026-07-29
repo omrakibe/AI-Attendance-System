@@ -48,7 +48,7 @@ public class SecurityConfig
                                 "/api/auth/verify-otp",
                                 "/api/auth/forgot-password",
                                 "/api/auth/reset-password",
-                                "/api/auth/internal/users/{id}",
+                                "/api/auth/internal/employee/{employeeId}",
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**"

@@ -21,7 +21,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Subject extends BaseEntity {
+public class Subject extends BaseEntity
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +41,7 @@ public class Subject extends BaseEntity {
     private Integer semester;
 
     @Column(nullable = false)
-    private Long facultyId;
+    private String facultyId;
 
     @Column(nullable = false)
     private Boolean active = true;

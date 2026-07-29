@@ -4,9 +4,8 @@ import in.attendai.attendanceservice.dto.response.InternalUserResponse;
 
 public interface IUserValidationService
 {
-    InternalUserResponse getUserById(Long userId);
 
-    InternalUserResponse validateFaculty(Long facultyId);
+    InternalUserResponse validateFaculty(String facultyId);
 
-    InternalUserResponse validateStudent(Long studentId);
+    InternalUserResponse validateStudent(String studentId);
 }

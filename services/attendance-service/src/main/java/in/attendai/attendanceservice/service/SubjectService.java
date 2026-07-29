@@ -41,7 +41,7 @@ public class SubjectService implements ISubjectService
                 .subjectName(request.getSubjectName())
                 .department(request.getDepartment())
                 .semester(request.getSemester())
-                .facultyId(faculty.getId())
+                .facultyId(faculty.getEmployeeId())
                 .active(true)
                 .build();
 
@@ -77,7 +77,7 @@ public class SubjectService implements ISubjectService
         subject.setSubjectName(request.getSubjectName());
         subject.setDepartment(request.getDepartment());
         subject.setSemester(request.getSemester());
-        subject.setFacultyId(faculty.getId());
+        subject.setFacultyId(faculty.getEmployeeId());
         subject.setActive(request.getActive());
 
         Subject updatedSubject = subjectRepository.save(subject);

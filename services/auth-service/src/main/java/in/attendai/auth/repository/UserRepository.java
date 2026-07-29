@@ -20,4 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long>
     boolean existsByRollNumber(String rollNumber);
 
     boolean existsByEmployeeId(String employeeId);
+
+    Optional<User> findByEmployeeId(String employeeId);
 }

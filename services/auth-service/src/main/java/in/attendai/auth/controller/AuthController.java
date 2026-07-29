@@ -79,10 +79,18 @@ public class AuthController
         return ResponseEntity.ok(authService.resetPassword(request));
     }
 
-    @GetMapping("/internal/users/{id}")
-    public ResponseEntity<InternalUserResponse> getUsers(@PathVariable Long id)
+//    @GetMapping("/internal/users/{id}")
+//    public ResponseEntity<InternalUserResponse> getUsers(@PathVariable Long id)
+//    {
+//        return ResponseEntity.ok(authService.getUsers(id));
+//    }
+
+    @GetMapping("/internal/employee/{employeeId}")
+    public ResponseEntity<InternalUserResponse> getUserByEmployeeId(
+            @PathVariable String employeeId
+    )
     {
-        return ResponseEntity.ok(authService.getUsers(id));
+        return ResponseEntity.ok(authService.getUserByEmployeeId(employeeId));
     }
 //    @GetMapping("/test-email")
 //    public String testEmail()

@@ -1,5 +1,6 @@
 package in.attendai.auth.security;
 
+import in.attendai.auth.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -32,19 +33,25 @@ public class JwtService
         );
     }
 
-    public String generateToken(UserDetails userDetails)
+    public String generateToken(User user)
     {
-        return generateToken(new HashMap<>(), userDetails);
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getId());
+        claims.put("role", user.getRole().name());
+        claims.put("email", user.getEmail());
+
+        return generateToken(claims, user);
+
     }
 
     public String generateToken(
             Map<String, Object> extraClaims,
-            UserDetails userDetails)
+            User user)
     {
 
         return Jwts.builder()
                 .claims(extraClaims)
-                .subject(userDetails.getUsername())
+                .subject(user.getEmail())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getSignInKey())

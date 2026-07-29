@@ -240,22 +240,43 @@ public class AuthService implements IAuthService
                 .toList();
     }
 
+//    @Override
+//    public InternalUserResponse getUsers(Long id)
+//    {
+//
+//        User user = userRepository.findById(id)
+//                .orElseThrow(() ->
+//                        new UserNotFoundException("User not found with ID: " + id));
+//
+//        return InternalUserResponse.builder()
+//                .id(user.getId())
+//                .fullName(user.getFullName())
+//                .email(user.getEmail())
+//                .role(user.getRole())
+//                .status(user.getStatus())
+//                .rollNumber(user.getRollNumber())
+//                .employeeId(user.getEmployeeId())
+//                .build();
+//    }
+
     @Override
-    public InternalUserResponse getUsers(Long id)
+    public InternalUserResponse getUserByEmployeeId(String employeeId)
     {
 
-        User user = userRepository.findById(id)
+        User user = userRepository.findByEmployeeId(employeeId)
                 .orElseThrow(() ->
-                        new UserNotFoundException("User not found with ID: " + id));
+                        new UserNotFoundException(
+                                "Faculty not found: " + employeeId
+                        ));
 
         return InternalUserResponse.builder()
                 .id(user.getId())
                 .fullName(user.getFullName())
                 .email(user.getEmail())
+                .employeeId(user.getEmployeeId())
+                .rollNumber(user.getRollNumber())
                 .role(user.getRole())
                 .status(user.getStatus())
-                .rollNumber(user.getRollNumber())
-                .employeeId(user.getEmployeeId())
                 .build();
     }
 
@@ -353,7 +374,7 @@ public class AuthService implements IAuthService
                     "Your account has been rejected. Please contact the administrator.");
         }
 
-        String jwt = jwtService.generateToken(new CustomUserDetails(user));
+        String jwt = jwtService.generateToken(user);
 
         return LoginResponse.builder()
                 .success(true)

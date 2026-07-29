@@ -6,13 +6,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(
-        name = "auth-service",
-        path = "/internal/users"
+        name = "AUTH-SERVICE",
+        path = "/api/auth/internal"
 )
 public interface AuthClient
 {
 
-    @GetMapping("/{id}")
-    InternalUserResponse getUserById(@PathVariable Long id);
+    @GetMapping("/employee/{employeeId}")
+    InternalUserResponse getUserByEmployeeId(
+            @PathVariable("employeeId") String employeeId
+    );
+
+    @GetMapping("/student/{rollNumber}")
+    InternalUserResponse getUserByRollNumber(
+            @PathVariable String rollNumber
+    );
 
 }

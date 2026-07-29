@@ -1,5 +1,6 @@
 package in.attendai.attendanceservice.service;
 
+import feign.FeignException;
 import in.attendai.attendanceservice.client.AuthClient;
 import in.attendai.attendanceservice.dto.response.InternalUserResponse;
 import in.attendai.attendanceservice.enums.AccountStatus;
@@ -14,51 +15,70 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserValidationService implements IUserValidationService
 {
+
     private final AuthClient authClient;
 
     @Override
-    public InternalUserResponse getUserById(Long userId)
+    public InternalUserResponse validateFaculty(String employeeId)
     {
+
+        InternalUserResponse user;
+
         try
         {
-            return authClient.getUserById(userId);
-        } catch (Exception ex)
+            user = authClient.getUserByEmployeeId(employeeId);
+        } catch (FeignException.NotFound ex)
         {
-            throw new UserNotFoundException("User not found with id: " + userId);
+            throw new UserNotFoundException(
+                    "Faculty not found. Employee ID: " + employeeId
+            );
         }
-    }
-
-    @Override
-    public InternalUserResponse validateFaculty(Long facultyId)
-    {
-        InternalUserResponse user = getUserById(facultyId);
 
         if (user.getStatus() != AccountStatus.ACTIVE)
         {
-            throw new InactiveUserException("Faculty is not active with id: " + facultyId);
+            throw new InactiveUserException(
+                    "Faculty is not active. Employee ID: " + employeeId
+            );
         }
 
         if (user.getRole() != Role.FACULTY)
         {
-            throw new InvalidFacultyException("User is not a faculty with id: " + facultyId);
+            throw new InvalidFacultyException(
+                    "User is not a faculty. Employee ID: " + employeeId
+            );
         }
 
         return user;
     }
 
     @Override
-    public InternalUserResponse validateStudent(Long studentId)
+    public InternalUserResponse validateStudent(String rollNumber)
     {
-        InternalUserResponse user = getUserById(studentId);
+
+        InternalUserResponse user;
+
+        try
+        {
+            user = authClient.getUserByRollNumber(rollNumber);
+        } catch (FeignException.NotFound ex)
+        {
+            throw new UserNotFoundException(
+                    "Student not found. Roll Number: " + rollNumber
+            );
+        }
 
         if (user.getStatus() != AccountStatus.ACTIVE)
         {
-            throw new InactiveUserException("Student is not active with id: " + studentId);
+            throw new InactiveUserException(
+                    "Student is not active. Roll Number: " + rollNumber
+            );
         }
 
         if (user.getRole() != Role.STUDENT)
         {
-            throw new UserNotFoundException("User is not a student with id: " + studentId);
+            throw new UserNotFoundException(
+                    "User is not a student. Roll Number: " + rollNumber
+            );
         }
 
         return user;

@@ -8,7 +8,8 @@ import lombok.*;
 
 @Getter
 @Setter
-public class CreateSubjectRequest {
+public class CreateSubjectRequest
+{
 
     @NotBlank(message = "Subject code is required.")
     private String subjectCode;
@@ -25,5 +26,5 @@ public class CreateSubjectRequest {
     private Integer semester;
 
     @NotNull(message = "Faculty ID is required.")
-    private Long facultyId;
+    private String facultyId;
 }

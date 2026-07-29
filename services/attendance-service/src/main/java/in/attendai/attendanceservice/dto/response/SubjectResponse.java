@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-public class SubjectResponse {
+public class SubjectResponse
+{
 
     private Long id;
 
@@ -21,7 +22,7 @@ public class SubjectResponse {
 
     private Integer semester;
 
-    private Long facultyId;
+    private String facultyId;
 
     private Boolean active;
 
