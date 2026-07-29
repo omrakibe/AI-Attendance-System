@@ -26,9 +26,8 @@
 
     letter-spacing: -2px;
 
-    /* user-select: none; */
-
-    cursor: default;
+    text-decoration: none;   /* Added */
+    cursor: pointer;          /* Changed from default */
 }
 .cap{
 

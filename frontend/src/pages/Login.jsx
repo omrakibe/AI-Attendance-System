@@ -63,7 +63,7 @@ function Login() {
           break;
 
         default:
-          navigate("/");
+          navigate("/login");
       }
 
     } catch (error) {

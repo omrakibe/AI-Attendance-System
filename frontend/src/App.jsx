@@ -12,13 +12,15 @@ import Students from "./pages/Students";
 import Faculty from "./pages/Faculty";
 
 import NotFound from "./pages/NotFound";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
     <Routes>
 
       {/* Authentication */}
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/verify-otp" element={<VerifyOtp />} />
       <Route path="/forgot-password" element={<ForgetPassword />} />

@@ -28,7 +28,7 @@ function ResetPassword() {
 
     alert(response.message);
 
-    navigate("/");
+    navigate("/login");
 
   } catch (error) {
 

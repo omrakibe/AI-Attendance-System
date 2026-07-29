@@ -144,7 +144,7 @@ function Register() {
 
             <p className="login-text">
               Already have an account?
-              <span onClick={() => navigate("/")}>
+              <span onClick={() => navigate("/login")}>
                 {" "}Login
               </span>
             </p>
